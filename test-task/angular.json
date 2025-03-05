@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "test-task": {
+    "angular-task": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/test-task",
+            "outputPath": "dist/angular-task",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -32,14 +32,10 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -51,8 +47,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
                 }
               ],
               "outputHashing": "all"
@@ -69,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "test-task:build:production"
+              "buildTarget": "angular-task:build:production"
             },
             "development": {
-              "buildTarget": "test-task:build:development"
+              "buildTarget": "angular-task:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -96,6 +92,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -103,5 +100,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "9ece13cc-2827-4248-8d65-c04cef2371ff"
   }
 }
