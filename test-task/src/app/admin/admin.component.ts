@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-  loggedUser : any;
+  loggedUser: any;
   displayedColumns: string[] = [
     'id',
     'firstName',
@@ -29,6 +29,7 @@ export class AdminComponent implements OnInit {
     'action',
   ];
   dataSource!: MatTableDataSource<any>;
+  logs: Array<string> = []; // Здесь будут храниться все действия пользователя
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -40,17 +41,15 @@ export class AdminComponent implements OnInit {
     private _router: Router
   ) {
     const localUser = localStorage.getItem('loggedUser');
-  if(localUser != null)
-    {
+    if (localUser != null) {
       this.loggedUser = JSON.parse(localUser);
     }
   }
 
-  onLogOut()
- {
-  localStorage.removeItem('loggedUser');
-  this._router.navigateByUrl('/loginsignup');
- }
+  onLogOut() {
+    localStorage.removeItem('loggedUser');
+    this._router.navigateByUrl('/loginsignup');
+  }
 
   ngOnInit(): void {
     this.getEmployeeList();
@@ -62,6 +61,7 @@ export class AdminComponent implements OnInit {
       next: (val) => {
         if (val) {
           this.getEmployeeList();
+          this.logs.push(`${this.loggedUser?.name || ''} добавил нового сотрудника`);
         }
       },
     });
@@ -92,6 +92,7 @@ export class AdminComponent implements OnInit {
       next: (res) => {
         this._coreService.openSnackBar('Employee deleted!', 'done');
         this.getEmployeeList();
+        this.logs.push(`${this.loggedUser?.name || ''} удалил сотрудника с id=${id}`);
       },
       error: console.log,
     });
@@ -106,6 +107,7 @@ export class AdminComponent implements OnInit {
       next: (val) => {
         if (val) {
           this.getEmployeeList();
+          this.logs.push(`${this.loggedUser?.name || ''} отредактировал сотрудника с id=${data.id}`);
         }
       },
     });
