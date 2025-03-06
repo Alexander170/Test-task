@@ -17,6 +17,17 @@
     "name": "typicode"
   },
   "employees": [
-    
+    {
+      "firstName": "test",
+      "lastName": "Ершов",
+      "email": "test@gmail.com",
+      "dob": "2025-03-03T21:00:00.000Z",
+      "gender": "Мужской",
+      "education": "Высшее",
+      "company": "bgfd",
+      "experience": "1",
+      "package": "120000",
+      "id": "b661"
+    }
   ]
 }

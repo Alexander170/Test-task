@@ -31,7 +31,7 @@ export class LoginComponent {
       users.push(this.registerObj);
       localStorage.setItem('users', JSON.stringify(users));
     }
-    this._snackbar.open('User register successfully', 'Close');
+    this._snackbar.open('Пользователь успешно зарегестрирован', 'Закрыть');
   }
   loginForm() {
     debugger;
@@ -44,11 +44,11 @@ export class LoginComponent {
           user.password == this.loginObj.password
       );
       if (isUserExist != undefined) {
-        this._snackbar.open('Login Successfull', 'Close');
+        this._snackbar.open('Успешный вход', 'Закрыть');
         localStorage.setItem('loggedUser', JSON.stringify(isUserExist));
         this._router.navigateByUrl('/main');
       } else {
-        this._snackbar.open('Email or Password is incorrect!');
+        this._snackbar.open('Эл.почта или пароль введены неверно!');
       }
     }
   }
