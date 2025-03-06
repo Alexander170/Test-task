@@ -1,16 +1,13 @@
-<div class="heading">
-  <h2>Login / Signup with Local Storage</h2>
-</div>
-<div class="loginsignup-container">
+<div class="login-section"><div class="loginsignup-container">
   <!-- REGISTER FORM -->
-  <form *ngIf="activeForm === 'register'">
-    <h2>REGISTER</h2>
+  <form *ngIf="activeForm === 'register'" class="form">
+    <h2>Регистрация</h2>
     <div class="form-group">
       <input
         type="text"
         name="name"
         [(ngModel)]="registerObj.name"
-        placeholder="Name"
+        placeholder="Имя"
       />
     </div>
     <div class="form-group">
@@ -18,7 +15,7 @@
         type="email"
         name="email"
         [(ngModel)]="registerObj.email"
-        placeholder="Email"
+        placeholder="Эл.почта"
       />
     </div>
     <div class="form-group">
@@ -26,26 +23,26 @@
         type="password"
         name="password"
         [(ngModel)]="registerObj.password"
-        placeholder="Password"
+        placeholder="Пароль"
       />
     </div>
-    <button type="submit" (click)="registerForm()">Register</button>
+    <button class="btn-shadow" type="submit" (click)="registerForm()">Регистрация</button>
 
     <p (click)="toggleForm('login')">
-      Already have an account ? <span class="highlighted">LOGIN</span>
+      У вас уже есть аккаунт ? <span class="highlighted">Войти</span>
     </p>
   </form>
 
   <!-- LOGIN FORM -->
   <form *ngIf="activeForm === 'login'">
-    <h2>LOGIN</h2>
+    <h2>Вход</h2>
 
     <div class="form-group">
       <input
         type="email"
         name="email"
         [(ngModel)]="loginObj.email"
-        placeholder="Email"
+        placeholder="Эл.почта"
       />
     </div>
     <div class="form-group">
@@ -53,13 +50,14 @@
         type="password"
         name="password"
         [(ngModel)]="loginObj.password"
-        placeholder="Password"
+        placeholder="Пароль"
       />
     </div>
-    <button type="submit" (click)="loginForm()">Login</button>
+    <button type="submit" (click)="loginForm()">Войти</button>
     <p (click)="toggleForm('register')">
-      Don't have an account ? <span class="highlighted">REGISTER</span>
+      У вас нет аккаунта? <span class="highlighted">Регистрация</span>
     </p>
   </form>
+</div>
 </div>
 <router-outlet></router-outlet>

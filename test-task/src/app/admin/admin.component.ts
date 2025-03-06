@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CoreService } from '../core/core.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -13,6 +14,7 @@ import { CoreService } from '../core/core.service';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
+  loggedUser : any;
   displayedColumns: string[] = [
     'id',
     'firstName',
@@ -34,8 +36,21 @@ export class AdminComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
     private _empService: EmployeeService,
-    private _coreService: CoreService
-  ) {}
+    private _coreService: CoreService,
+    private _router: Router
+  ) {
+    const localUser = localStorage.getItem('loggedUser');
+  if(localUser != null)
+    {
+      this.loggedUser = JSON.parse(localUser);
+    }
+  }
+
+  onLogOut()
+ {
+  localStorage.removeItem('loggedUser');
+  this._router.navigateByUrl('/loginsignup');
+ }
 
   ngOnInit(): void {
     this.getEmployeeList();

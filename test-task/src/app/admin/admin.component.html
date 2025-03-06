@@ -4,6 +4,13 @@
   <button mat-raised-button (click)="openAddEditEmpForm()">
     Добавить сотрудника
   </button>
+  <!-- <button mat-raised-button>
+    Выход
+  </button> -->
+  <ul class="navbar">
+    <li><span class="glyphicon glyphicon-user">Пользователь:</span> {{ loggedUser?.name }}</li>
+    <li><button mat-raised-button><a href="#" class="logout_button" (click)="onLogOut()"><span class="log-out"></span>Выход</a></button></li>
+  </ul>
 </mat-toolbar>
 
 <div class="main-body">
@@ -88,7 +95,7 @@
 
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">
-          No data matching the filter "{{ input.value }}"
+          Нет данных, соответствующих фильтру "{{ input.value }}"
         </td>
       </tr>
     </table>
