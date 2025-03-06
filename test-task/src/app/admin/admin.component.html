@@ -1,3 +1,5 @@
+<!-- admin.component.html -->
+
 <mat-toolbar color="primary">
   <span>Реестр сотрудников</span>
   <span class="example-spacer"></span>
@@ -104,5 +106,15 @@
       [pageSizeOptions]="[5, 10, 25, 100]"
       aria-label="Select page of users"
     ></mat-paginator>
+  </div>
+
+  <!-- Блок для вывода журнала действий -->
+  <div class="log-container">
+    <h4>Журнал действий:</h4>
+    <ul>
+      <li *ngFor="let log of logs">
+        Пользователь {{ log.userName }} {{ log.action }} в {{ log.createdAt | date:'short' }}
+      </li>
+    </ul>
   </div>
 </div>

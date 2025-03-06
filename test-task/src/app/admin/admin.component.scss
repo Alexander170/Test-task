@@ -29,3 +29,19 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+.log-container {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 600px;
+  max-width: 250px;
+}
+
+.logs {
+  font-size: 22px;
+}
+
+.list_logs {
+  list-style: none;
+}
