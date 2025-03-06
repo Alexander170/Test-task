@@ -6,24 +6,50 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'app-login',
   standalone: false,
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   activeForm: 'login' | 'register' = 'login';
-  registerObj: registerModel = new registerModel();
-  loginObj: loginModel = new loginModel();
+  registerObj: RegisterModel = { name: '', email: '', password: '' };
+  loginObj: LoginModel = { email: '', password: '' }; 
 
-  constructor(private _snackbar: MatSnackBar, private _router: Router) {}
+  errorEmailRegister: boolean = false;
+  errorNameRegister: boolean = false;
+  errorPasswordRegister: boolean = false;
+  errorEmailLogin: boolean = false;
+  errorPasswordLogin: boolean = false;
+
+  constructor(private snackbar: MatSnackBar, private router: Router) {}
+
+  ngOnInit(): void {}
 
   toggleForm(form: 'login' | 'register') {
     this.activeForm = form;
   }
 
   registerForm() {
-    debugger;
-    const localusers = localStorage.getItem('users');
-    if (localusers != null) {
-      const users = JSON.parse(localusers);
+    this.errorEmailRegister = false;
+    this.errorNameRegister = false;
+    this.errorPasswordRegister = false;
+
+    if (!this.registerObj.name || this.registerObj.name.trim().length === 0) {
+      this.errorNameRegister = true;
+      return;
+    }
+
+    if (!this.validateEmail(this.registerObj.email)) {
+      this.errorEmailRegister = true;
+      return;
+    }
+
+    if (!this.registerObj.password || this.registerObj.password.length < 6) {
+      this.errorPasswordRegister = true;
+      return;
+    }
+
+    const localUsers = localStorage.getItem('users');
+    if (localUsers != null) {
+      const users = JSON.parse(localUsers);
       users.push(this.registerObj);
       localStorage.setItem('users', JSON.stringify(users));
     } else {
@@ -31,43 +57,53 @@ export class LoginComponent {
       users.push(this.registerObj);
       localStorage.setItem('users', JSON.stringify(users));
     }
-    this._snackbar.open('Пользователь успешно зарегестрирован', 'Закрыть');
+    this.snackbar.open('Пользователь успешно зарегистрирован', 'Закрыть');
   }
+
   loginForm() {
-    debugger;
-    const localusers = localStorage.getItem('users');
-    if (localusers != null) {
-      const users = JSON.parse(localusers);
+    this.errorEmailLogin = false;
+    this.errorPasswordLogin = false;
+
+    if (!this.validateEmail(this.loginObj.email)) {
+      this.errorEmailLogin = true;
+      return;
+    }
+
+    if (!this.loginObj.password || this.loginObj.password.length < 6) {
+      this.errorPasswordLogin = true;
+      return;
+    }
+
+    const localUsers = localStorage.getItem('users');
+    if (localUsers != null) {
+      const users = JSON.parse(localUsers);
       const isUserExist = users.find(
-        (user: registerModel) =>
-          user.email == this.loginObj.email &&
-          user.password == this.loginObj.password
+        (user: RegisterModel) =>
+          user.email === this.loginObj.email && user.password === this.loginObj.password
       );
-      if (isUserExist != undefined) {
-        this._snackbar.open('Успешный вход', 'Закрыть');
+      if (isUserExist) {
+        this.snackbar.open('Успешный вход', 'Закрыть');
         localStorage.setItem('loggedUser', JSON.stringify(isUserExist));
-        this._router.navigateByUrl('/main');
+        this.router.navigateByUrl('/main');
       } else {
-        this._snackbar.open('Эл.почта или пароль введены неверно!');
+        this.snackbar.open('Электронная почта или пароль введены неверно!', 'Закрыть');
       }
     }
   }
+
+  validateEmail(email: string): boolean {
+    const re = /^(([^<>()[$$\\.,;:\s@"]+(\.[^<>()[$$\\.,;:\s@"]+)*)|(".+"))@(($$[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$$)|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
 }
-export class registerModel {
+
+interface RegisterModel {
   name: string;
   email: string;
   password: string;
-  constructor() {
-    this.name = '';
-    this.email = '';
-    this.password = '';
-  }
 }
-export class loginModel {
+
+interface LoginModel {
   email: string;
   password: string;
-  constructor() {
-    this.email = '';
-    this.password = '';
-  }
 }
