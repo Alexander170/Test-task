@@ -1,8 +1,10 @@
+// app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { AdminComponent } from './admin/admin.component';
+import { AdminComponent } from './admin/admin.component'; 
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -15,8 +17,9 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'main', // или любое другое название маршрута для основного компонента
+    path: 'main',
     component: AdminComponent,
+    canActivate: [AuthGuard], 
   },
 ];
 

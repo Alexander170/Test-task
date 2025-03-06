@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../auth.service'; // Импорт сервиса аутентификации
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit {
   activeForm: 'login' | 'register' = 'login';
   registerObj: RegisterModel = { name: '', email: '', password: '' };
-  loginObj: LoginModel = { email: '', password: '' }; 
+  loginObj: LoginModel = { email: '', password: '' };
 
   errorEmailRegister: boolean = false;
   errorNameRegister: boolean = false;
@@ -19,7 +20,11 @@ export class LoginComponent implements OnInit {
   errorEmailLogin: boolean = false;
   errorPasswordLogin: boolean = false;
 
-  constructor(private snackbar: MatSnackBar, private router: Router) {}
+  constructor(
+    private snackbar: MatSnackBar,
+    private router: Router,
+    private authService: AuthService // Инъекция сервиса AuthService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -58,6 +63,11 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('users', JSON.stringify(users));
     }
     this.snackbar.open('Пользователь успешно зарегистрирован', 'Закрыть');
+
+    // После успешной регистрации также войдем в систему
+    this.loginObj.email = this.registerObj.email;
+    this.loginObj.password = this.registerObj.password;
+    this.loginForm();
   }
 
   loginForm() {
@@ -79,11 +89,17 @@ export class LoginComponent implements OnInit {
       const users = JSON.parse(localUsers);
       const isUserExist = users.find(
         (user: RegisterModel) =>
-          user.email === this.loginObj.email && user.password === this.loginObj.password
+          user.email === this.loginObj.email &&
+          user.password === this.loginObj.password
       );
       if (isUserExist) {
         this.snackbar.open('Успешный вход', 'Закрыть');
         localStorage.setItem('loggedUser', JSON.stringify(isUserExist));
+        
+        // Вызываем метод аутентификации в сервисе
+        this.authService.login(isUserExist); 
+
+        // Переходим на главную страницу
         this.router.navigateByUrl('/main');
       } else {
         this.snackbar.open('Электронная почта или пароль введены неверно!', 'Закрыть');
@@ -92,7 +108,7 @@ export class LoginComponent implements OnInit {
   }
 
   validateEmail(email: string): boolean {
-    const re = /^(([^<>()[$$\\.,;:\s@"]+(\.[^<>()[$$\\.,;:\s@"]+)*)|(".+"))@(($$[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$$)|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()[$$\.,;:\s@\"]+(\.[^<>()[$$\.,;:\s@\"]+)*)|(\".+\"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$)|((:?[a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,})$)/;
     return re.test(String(email).toLowerCase());
   }
 }
