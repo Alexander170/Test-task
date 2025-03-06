@@ -1,3 +1,5 @@
+<!-- admin.component.html -->
+
 <mat-toolbar color="primary">
   <span>Реестр сотрудников</span>
   <span class="example-spacer"></span>
@@ -12,12 +14,7 @@
     <li><button mat-raised-button><a href="#" class="logout_button" (click)="onLogOut()"><span class="log-out"></span>Выход</a></button></li>
   </ul>
 </mat-toolbar>
-<!-- <div class="log-container">
-  <h4 class="logs">Журнал действий:</h4>
-  <ul class="list_logs">
-    <li *ngFor="let log of logs">{{ log }}</li>
-  </ul>
-</div> -->
+
 <div class="main-body">
   <mat-form-field>
     <mat-label>Фильтр</mat-label>
@@ -111,10 +108,13 @@
     ></mat-paginator>
   </div>
 
+  <!-- Блок для вывода журнала действий -->
   <div class="log-container">
-    <h4 class="logs">Журнал действий:</h4>
-    <ul class="list_logs">
-      <li *ngFor="let log of logs">{{ log }}</li>
+    <h4>Журнал действий:</h4>
+    <ul>
+      <li *ngFor="let log of logs">
+        Пользователь {{ log.userName }} {{ log.action }} в {{ log.createdAt | date:'short' }}
+      </li>
     </ul>
   </div>
 </div>

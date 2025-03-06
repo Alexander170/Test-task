@@ -16,21 +16,43 @@
   "profile": {
     "name": "typicode"
   },
+  "action_logs": [
+    {
+      "id": "149b",
+      "userName": "test",
+      "action": "отредактировал сотрудника с id=a45e"
+    },
+    {
+      "id": "334b",
+      "userName": "test",
+      "action": "отредактировал сотрудника с id=a45e"
+    },
+    {
+      "id": "357d",
+      "userName": "test",
+      "action": "отредактировал сотрудника с id=515a"
+    },
+    {
+      "id": "888f",
+      "userName": "alex",
+      "action": "отредактировал сотрудника с id=a45e"
+    }
+  ],
   "employees": [
     {
-      "firstName": "Васи",
-      "lastName": "Васильев",
+      "firstName": "Вас",
+      "lastName": "Василь",
       "email": "vasua@test.ru",
       "dob": "1992-04-19T20:00:00.000Z",
       "gender": "Мужской",
       "education": "Магистр",
       "company": "ММЗ",
-      "experience": "1",
+      "experience": "12",
       "package": "150000",
       "id": "515a"
     },
     {
-      "firstName": "Дани",
+      "firstName": "Даниkk",
       "lastName": "",
       "email": "test@gmail.com",
       "dob": "2000-11-13T21:00:00.000Z",
@@ -42,16 +64,16 @@
       "id": "72f0"
     },
     {
-      "id": "a45e",
-      "firstName": "Сергей",
+      "firstName": "Сер",
       "lastName": "Васильев",
       "email": "test@gmail.com",
       "dob": "1997-12-28T21:00:00.000Z",
       "gender": "Мужской",
       "education": "Магистр",
       "company": "ОМЕГА",
-      "experience": "6",
-      "package": "135000"
+      "experience": "9",
+      "package": "135000",
+      "id": "a45e"
     }
   ]
 }
