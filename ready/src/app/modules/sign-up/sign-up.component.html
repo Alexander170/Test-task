@@ -1,0 +1,29 @@
+<div class="layout">
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+        <mat-form-field appearance="outline" class="field">
+          <mat-label>Логин</mat-label>
+          <input matInput formControlName="login" />
+          <mat-error *ngIf="loginControl.errors?.['required']">Обязательно для заполнения</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="field">
+          <mat-label>Электронная почта</mat-label>
+          <input matInput formControlName="email" />
+          <mat-error *ngIf="emailControl.errors?.['required']">Обязательно для заполнения</mat-error>
+          <mat-error *ngIf="emailControl.errors?.['email']">Некорректная электронная почта</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="field">
+          <mat-label>Пароль</mat-label>
+          <input matInput type="password" formControlName="password" />
+          <mat-error *ngIf="passwordControl.errors?.['required']">Обязательно для заполнения</mat-error>
+        </mat-form-field>
+        <div *ngIf="!!error" class="error">{{ error }}</div>
+        <button mat-flat-button type="submit">Регистрация</button>
+      </form>
+      <div class="link">
+        <a routerLink="/login">Уже зарегистрированы? Войти</a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,28 @@
+.layout {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.field {
+  width: 100%;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  color: #ba1a1a;
+}
