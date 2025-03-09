@@ -9,7 +9,11 @@ import {
   OverlayRef,
   PortalModule,
   TemplatePortal
-} from "./chunk-IFJU4ERL.js";
+} from "./chunk-T2335FTZ.js";
+import {
+  CdkScrollable
+} from "./chunk-NJFSRJKK.js";
+import "./chunk-L3WRX2S3.js";
 import {
   animate,
   animateChild,
@@ -19,11 +23,7 @@ import {
   style,
   transition,
   trigger
-} from "./chunk-UZRB7HGO.js";
-import {
-  CdkScrollable
-} from "./chunk-WJYCFWIG.js";
-import "./chunk-CVVJM3CO.js";
+} from "./chunk-LBN4XXY4.js";
 import {
   A11yModule,
   Directionality,
@@ -36,11 +36,11 @@ import {
   _getFocusedElementPierceShadowDom,
   coerceNumberProperty,
   hasModifierKey
-} from "./chunk-FOLBAVSS.js";
+} from "./chunk-G7PNPNQR.js";
 import {
   DOCUMENT,
   Location
-} from "./chunk-BBS7MU37.js";
+} from "./chunk-TVT5GYZJ.js";
 import {
   ANIMATION_MODULE_TYPE,
   ChangeDetectionStrategy,
@@ -86,7 +86,7 @@ import {
   ɵɵqueryRefresh,
   ɵɵtemplate,
   ɵɵviewQuery
-} from "./chunk-WN35FCBX.js";
+} from "./chunk-RNELH5PP.js";
 import {
   Subject,
   __spreadProps,
@@ -97,7 +97,7 @@ import {
   of,
   startWith,
   take
-} from "./chunk-S35MAB2V.js";
+} from "./chunk-7PP4ZR3C.js";
 
 // node_modules/@angular/cdk/fesm2022/dialog.mjs
 function CdkDialogContainer_ng_template_0_Template(rf, ctx) {
