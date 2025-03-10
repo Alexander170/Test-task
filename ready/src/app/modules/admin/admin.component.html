@@ -6,7 +6,7 @@
     <button mat-raised-button (click)="logout()">Выйти из системы</button>
   </div>
 </mat-toolbar>
-<span class="glyphicon glyphicon-user">Пользователь:</span> {{ loggedUser?.login }}
+<span class="logged__user">Пользователь:</span> {{ loggedUser?.login }}
 
 <div class="main">
   <mat-form-field appearance="outline" class="filter">
@@ -14,13 +14,10 @@
     <input matInput (keyup)="applyFilter($event)" #input />
   </mat-form-field>
   <table mat-table [dataSource]="dataSource" matSort>
-    <!-- ID Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Номер</th>
       <td mat-cell *matCellDef="let row">{{ row.id }}</td>
     </ng-container>
-
-    <!-- Progress Column -->
     <ng-container matColumnDef="firstName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Имя</th>
       <td mat-cell *matCellDef="let row">{{ row.firstName }}</td>
@@ -80,9 +77,6 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-
-    <!--    <tr class="mat-row" *matNoDataRow>-->
-    <!--        <td class="mat-cell" colspan="4">No data matching the filter "{{ input.value }}"</td>-->
-    <!--    </tr>-->
+    
   </table>
 </div>
