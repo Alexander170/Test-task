@@ -10,7 +10,6 @@
         <input matInput (keyup)="applyFilter($event)" #input />
     </mat-form-field>
     <table mat-table [dataSource]="dataSource" matSort>
-        <!-- Progress Column -->
         <ng-container matColumnDef="userId">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Имя пользователя</th>
             <td mat-cell *matCellDef="let row">{{ row.userId }}</td>
